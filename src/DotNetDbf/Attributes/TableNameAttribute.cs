@@ -6,19 +6,28 @@ using System.Threading.Tasks;
 
 namespace DotNetDbf.Attributes
 {
+    /// <summary>
+    /// DB table name attribute
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public sealed class TableNameAttribute : Attribute
     {
-        private readonly string _tableName;
-
+        /// <summary>
+        /// Contructor
+        /// </summary>
+        /// <param name="tableName">DB table name</param>
         public TableNameAttribute(string tableName)
         {
-            _tableName = tableName;
+            this.TableName = tableName;
         }
 
+        /// <summary>
+        /// DB table name
+        /// </summary>
         public string TableName
         {
-            get { return _tableName; }
+            get;
+            private set;
         }
     }
 }

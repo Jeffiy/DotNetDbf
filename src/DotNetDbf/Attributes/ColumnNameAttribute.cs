@@ -6,19 +6,28 @@ using System.Threading.Tasks;
 
 namespace DotNetDbf.Attributes
 {
+    /// <summary>
+    /// Column mapper attribute
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public sealed class ColumnNameAttribute : Attribute
     {
-        private readonly string _columnName;
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="columnName">DB column name</param>
         public ColumnNameAttribute(string columnName)
         {
-            _columnName = columnName;
+            this.ColumnName = columnName;
         }
 
-        public string ColumnName
+        /// <summary>
+        /// DB column name
+        /// </summary>
+        public string ColumnName 
         {
-            get { return _columnName; }
+            get;
+            private set;
         }
     }
 }
