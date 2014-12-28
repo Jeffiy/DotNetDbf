@@ -3,26 +3,28 @@ Very simple library to manage DBF files
 
 ## Core features
 - Define your model with classes and attributes.
-   	[TableName("Ivas")]
-		public sealed class Vat
-       	: EntityBase
-        {
-       	[ColumnName("CTIPOIVA")]
-       	[PrimaryKey(false)]
-       	public string Code { get; set; }
 
-       	[ColumnName("CDETIVA")]
-       	public string Description { get; set; }
+		[TableName("Ivas")]
+		public sealed class Vat : EntityBase
+    		{
+        		[ColumnName("CTIPOIVA")]
+	        	[PrimaryKey(false)]
+        		public string Code { get; set; }
 
-       	[ColumnName("NPORCIVA")]
-       	public double Percentage { get; set; }
+        		[ColumnName("CDETIVA")]
+        		public string Description { get; set; }
 
-       	public override string ToString()
-       	{
-           	return Code + " - " + Description + " / " + Percentage.ToString();
-       	}
-      }
+        		[ColumnName("NPORCIVA")]
+        		public double Percentage { get; set; }
+
+        		public override string ToString()
+        		{
+          			return Code + " - " + Description + " / " + Percentage.ToString();
+        		}
+		}
+
 - Map any query results to an IList<T> collection without dealing with DataReaders or DataTables.
+
             var vatService = new VatService("dbf");
             var result = vatService.GetAllVats();
 
@@ -32,6 +34,7 @@ Very simple library to manage DBF files
             });
 	
 - Simple API to manage query filters.
+
             List<DbfParameter> filters = new List<DbfParameter>();
             Vat d = new Vat();
 
@@ -45,6 +48,7 @@ Very simple library to manage DBF files
 
             var result = base.ExecuteQuery(base.GetDefaultSelectQuery(), filters);
 - Built-in methods for INSERT, UPDATE and DELETE.
+
         public int AddVat(Vat entity)
         {
             return base.Insert(entity);
