@@ -125,6 +125,6 @@ And then you must create all your data access methods.
         }
     }
 
-
+See ExampleModel, ExampleDataServices and Unit Test projects for more details.
 
 
