@@ -194,9 +194,9 @@ namespace DotNetDbf
 
             entity.GetType().GetProperties().ToList().ForEach(property =>
             {
-                if(Attribute.IsDefined(property, typeof(ColumnNameAttribute)))
+                if(this.isPropertyColumn(property))
                 {
-                    if (Attribute.IsDefined(property, typeof(PrimaryKeyAttribute)))
+                    if (this.isPrimaryKeyColumn(property))
                     {
                         whereFilter = getColumnName(property) + "=" + getFormattedValue(property, entity);
                     }
