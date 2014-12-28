@@ -236,7 +236,7 @@ namespace DotNetDbf
 
             entity.GetType().GetProperties().ToList().ForEach(property =>
             {
-                if (Attribute.IsDefined(property, typeof(PrimaryKeyAttribute)))
+                if (this.isPrimaryKeyColumn(property))
                 {
                     whereFilter = getColumnName(property) + "=" + getFormattedValue(property, entity);
                 }
@@ -310,7 +310,7 @@ namespace DotNetDbf
         /// </summary>
         /// <param name="property">Property Field</param>
         /// <returns>boolean</returns>
-        private static bool isPropertyColumn(PropertyInfo property)
+        private bool isPropertyColumn(PropertyInfo property)
         {
             return Attribute.IsDefined(property, typeof(ColumnNameAttribute));
         }
@@ -320,7 +320,7 @@ namespace DotNetDbf
         /// </summary>
         /// <param name="property">Property</param>
         /// <returns>boolean</returns>
-        private static bool isPrimaryKeyColumn(PropertyInfo property)
+        private bool isPrimaryKeyColumn(PropertyInfo property)
         {
             return Attribute.IsDefined(property, typeof(PrimaryKeyAttribute));
         }
@@ -330,7 +330,7 @@ namespace DotNetDbf
         /// </summary>
         /// <param name="property">Property</param>
         /// <returns>Boolean</returns>
-        private static bool isAutoIncrementColumn(PropertyInfo property)
+        private bool isAutoIncrementColumn(PropertyInfo property)
         {
             if (Attribute.IsDefined(property, typeof(PrimaryKeyAttribute)))
             {
