@@ -452,7 +452,7 @@ namespace DotNetDbf
         private string getFormattedValue(PropertyInfo property, object entity)
         {
             string delimiter = "";
-            object value = property.GetValue(entity);
+            object value = property.GetValue(entity, null);
 
             if (property.PropertyType.FullName == string.Empty.GetType().FullName)
             {
