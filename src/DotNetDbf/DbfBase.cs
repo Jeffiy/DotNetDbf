@@ -14,6 +14,21 @@ namespace DotNetDbf
     /// <typeparam name="T"></typeparam>
     public abstract class DbfBase<T>
     {
+        private string _tableName = string.Empty;
+
+        public string TableName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_tableName))
+                {
+                    _tableName = getTableName();
+                }
+
+                return _tableName;
+            }
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -38,7 +53,7 @@ namespace DotNetDbf
         /// <returns>SQL String</returns>
         protected string GetDefaultSelectQuery()
         {
-            return "select * from [" + this.getTableName() + "]";
+            return "select * from [" + TableName + "]";
         }
 
         /// <summary>
@@ -164,7 +179,7 @@ namespace DotNetDbf
             List<string> fieldList = getFieldsNameList(entity, false);
             List<string> valueList = getValueList(entity, false);
 
-            string sqlQuery = string.Format(baseInsert, this.getTableName(), string.Join(",", fieldList.ToArray()), string.Join(",", valueList.ToArray()));
+            string sqlQuery = string.Format(baseInsert, TableName, string.Join(",", fieldList.ToArray()), string.Join(",", valueList.ToArray()));
 
             using (OleDbConnection cn = new OleDbConnection(this.ConnectionString))
             {
@@ -207,7 +222,7 @@ namespace DotNetDbf
                 }
             });
 
-            string sqlQuery = string.Format(baseUpdate, this.getTableName(), string.Join(",", fieldValueList), whereFilter);
+            string sqlQuery = string.Format(baseUpdate, TableName, string.Join(",", fieldValueList), whereFilter);
 
             using (OleDbConnection cn = new OleDbConnection(this.ConnectionString))
             {
@@ -242,7 +257,7 @@ namespace DotNetDbf
                 }
             });
 
-            string sqlQuery = string.Format(baseDelete, this.getTableName(), whereFilter);
+            string sqlQuery = string.Format(baseDelete, TableName, whereFilter);
 
             using (OleDbConnection cn = new OleDbConnection(this.ConnectionString))
             {
